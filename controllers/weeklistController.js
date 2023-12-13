@@ -4,14 +4,14 @@ const WeekList = require('../models/weeklistModel');
 const isLoggedIn = (req, res, next) => {
     try {
         const { jwttoken } = req.headers;
-        const user = jwt.verify(jwttoken, process.env.JWT);
+        const user = jwt.verify(jwttoken, process.env.JWT_SECRET);
         req.user = user;
         return next();
     } catch (error) {
         console.log(error);
         res.json({
             status: 'FAILED',
-            message: "You've not logged in! Please login",
+            message: "Please login to continue.",
         });
         return;
     }
